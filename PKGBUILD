@@ -1,6 +1,6 @@
 # Maintainer: mehmetbayoglu <mehmetbayoglu@users.noreply.github.com>
 pkgname=power-control-center
-pkgver=1.0.0
+pkgver=1.1.0
 pkgrel=1
 pkgdesc="GUI power management for Linux laptops — CPU (Intel/AMD), GPU (NVIDIA/Arc/AMD), battery, TLP, daemons, sensors"
 arch=('any')
@@ -9,8 +9,8 @@ license=('MIT')
 
 depends=(
     'python'
-    'tk'        # python-tkinter
-    'polkit'    # pkexec for privileged sysfs writes
+    'tk'
+    'polkit'
 )
 
 optdepends=(
@@ -31,11 +31,14 @@ optdepends=(
 
 source=(
     "$pkgname-$pkgver.py::https://raw.githubusercontent.com/mehmetbayoglu/power-control-center/v$pkgver/power-control-center.py"
+    "$pkgname.desktop::https://raw.githubusercontent.com/mehmetbayoglu/power-control-center/v$pkgver/power-control-center.desktop"
 )
-sha256sums=('30fe4ddf4d95403a2d044ece9b2fe75dcf1846d1f6d5e697bcd0f5d94fab59be')
+sha256sums=(
+    '2b45365b80782a3f2f90e08a181caac976a5a21c7f3a0ff8a2ae2ed18bbea919'
+    '085eea02ff51ff70b93e1842349be02f081a44e2104c26176c6a9d9f42b52cca'
+)
 
 prepare() {
-    # Validate the script is valid Python before packaging
     python -c "
 import ast, sys
 try:
@@ -47,11 +50,11 @@ except SyntaxError as e:
 }
 
 package() {
-    # ── Main script ──────────────────────────────────────────────────────
+    # Main script
     install -Dm755 "$srcdir/$pkgname-$pkgver.py" \
         "$pkgdir/usr/share/$pkgname/$pkgname.py"
 
-    # Wrapper in /usr/bin so it runs from any terminal or launcher
+    # Wrapper so it launches from any terminal or app launcher
     install -dm755 "$pkgdir/usr/bin"
     cat > "$pkgdir/usr/bin/$pkgname" <<'EOF'
 #!/bin/sh
@@ -59,45 +62,12 @@ exec python /usr/share/power-control-center/power-control-center.py "$@"
 EOF
     chmod 755 "$pkgdir/usr/bin/$pkgname"
 
-    # ── Desktop entry ────────────────────────────────────────────────────
-    install -dm755 "$pkgdir/usr/share/applications"
-    cat > "$pkgdir/usr/share/applications/$pkgname.desktop" <<'EOF'
-[Desktop Entry]
-Name=Power Control Center
-GenericName=Power Manager
-Comment=Manage CPU, GPU, battery, TLP, and power daemons
-Exec=power-control-center
-Icon=battery
-Terminal=false
-Type=Application
-Categories=System;Settings;HardwareSettings;
-Keywords=power;cpu;gpu;battery;tlp;performance;energy;
-StartupNotify=true
-EOF
+    # Desktop entry (from source)
+    install -Dm644 "$srcdir/$pkgname.desktop" \
+        "$pkgdir/usr/share/applications/$pkgname.desktop"
 
-    # ── License ──────────────────────────────────────────────────────────
-    install -dm755 "$pkgdir/usr/share/licenses/$pkgname"
-    cat > "$pkgdir/usr/share/licenses/$pkgname/LICENSE" <<'EOF'
-MIT License
-
-Copyright (c) 2025 zmite
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+    # License
+    install -Dm644 /dev/stdin "$pkgdir/usr/share/licenses/$pkgname/LICENSE" <<'EOF'
+MIT License - Copyright (c) 2025 mehmetbayoglu
 EOF
 }

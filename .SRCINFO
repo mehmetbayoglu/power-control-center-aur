@@ -1,6 +1,6 @@
 pkgbase = power-control-center
 	pkgdesc = GUI power management for Linux laptops — CPU (Intel/AMD), GPU (NVIDIA/Arc/AMD), battery, TLP, daemons, sensors
-	pkgver = 1.0.0
+	pkgver = 1.1.0
 	pkgrel = 1
 	url = https://github.com/mehmetbayoglu/power-control-center
 	arch = any
@@ -21,7 +21,9 @@ pkgbase = power-control-center
 	optdepends = lm_sensors: hardware sensor readings (Sensors tab)
 	optdepends = upower: battery status, energy rate, cycle count
 	optdepends = acpi: battery detail output
-	source = power-control-center-1.0.0.py::https://raw.githubusercontent.com/mehmetbayoglu/power-control-center/v1.0.0/power-control-center.py
-	sha256sums = 30fe4ddf4d95403a2d044ece9b2fe75dcf1846d1f6d5e697bcd0f5d94fab59be
+	source = power-control-center-1.1.0.py::https://raw.githubusercontent.com/mehmetbayoglu/power-control-center/v1.1.0/power-control-center.py
+	source = power-control-center.desktop::https://raw.githubusercontent.com/mehmetbayoglu/power-control-center/v1.1.0/power-control-center.desktop
+	sha256sums = 2b45365b80782a3f2f90e08a181caac976a5a21c7f3a0ff8a2ae2ed18bbea919
+	sha256sums = 085eea02ff51ff70b93e1842349be02f081a44e2104c26176c6a9d9f42b52cca
 
 pkgname = power-control-center
