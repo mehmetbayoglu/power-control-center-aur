@@ -31,11 +31,9 @@ optdepends=(
 
 source=(
     "$pkgname-$pkgver.py::https://raw.githubusercontent.com/mehmetbayoglu/power-control-center/v$pkgver/power-control-center.py"
-    "$pkgname.desktop::https://raw.githubusercontent.com/mehmetbayoglu/power-control-center/v$pkgver/power-control-center.desktop"
 )
 sha256sums=(
     '2b45365b80782a3f2f90e08a181caac976a5a21c7f3a0ff8a2ae2ed18bbea919'
-    '085eea02ff51ff70b93e1842349be02f081a44e2104c26176c6a9d9f42b52cca'
 )
 
 prepare() {
@@ -62,9 +60,19 @@ exec python /usr/share/power-control-center/power-control-center.py "$@"
 EOF
     chmod 755 "$pkgdir/usr/bin/$pkgname"
 
-    # Desktop entry (from source)
-    install -Dm644 "$srcdir/$pkgname.desktop" \
-        "$pkgdir/usr/share/applications/$pkgname.desktop"
+    # Desktop entry (generated inline)
+    install -dm755 "$pkgdir/usr/share/applications"
+    cat > "$pkgdir/usr/share/applications/$pkgname.desktop" <<EOF
+[Desktop Entry]
+Name=Power Control Center
+Comment=GUI power management for Linux laptops
+Exec=power-control-center
+Icon=power-control-center
+Terminal=false
+Type=Application
+Categories=System;Settings;
+Keywords=power;cpu;gpu;battery;tlp;performance;
+EOF
 
     # License
     install -Dm644 /dev/stdin "$pkgdir/usr/share/licenses/$pkgname/LICENSE" <<'EOF'
