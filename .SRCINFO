@@ -22,6 +22,8 @@ pkgbase = power-control-center
 	optdepends = upower: battery status, energy rate, cycle count
 	optdepends = acpi: battery detail output
 	source = power-control-center-1.1.0.py::https://raw.githubusercontent.com/mehmetbayoglu/power-control-center/v1.1.0/power-control-center.py
+	source = power-control-center.desktop
 	sha256sums = 2b45365b80782a3f2f90e08a181caac976a5a21c7f3a0ff8a2ae2ed18bbea919
+	sha256sums = 4a2f295a0bb18deb2c96837c81fb22faa97c1f839fc4393ead89d2352c88c35e
 
 pkgname = power-control-center

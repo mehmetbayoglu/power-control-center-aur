@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Power Control Center
+Comment=GUI power management for Linux laptops
+Exec=power-control-center
+Icon=power-control-center
+Terminal=false
+Type=Application
+Categories=System;Settings;
+Keywords=power;cpu;gpu;battery;tlp;performance;
