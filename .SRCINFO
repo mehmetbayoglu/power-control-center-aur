@@ -1,0 +1,27 @@
+pkgbase = power-control-center
+	pkgdesc = GUI power management for Linux laptops — CPU (Intel/AMD), GPU (NVIDIA/Arc/AMD), battery, TLP, daemons, sensors
+	pkgver = 1.0.0
+	pkgrel = 1
+	url = https://github.com/mehmetbayoglu/power-control-center
+	arch = any
+	license = MIT
+	depends = python
+	depends = tk
+	depends = polkit
+	optdepends = power-profiles-daemon: profile switching (EPP, platform profile, turbo)
+	optdepends = tlp: peripheral power management + coexist mode with ppd
+	optdepends = thermald: Intel thermal daemon control
+	optdepends = auto-cpufreq: automatic CPU frequency/governor optimizer
+	optdepends = nvidia-utils: NVIDIA GPU power limit, stats, and runtime PM
+	optdepends = nvtop: GPU monitor (launched from GPU tab)
+	optdepends = turbostat: CPU turbostat sampling (CPU tab)
+	optdepends = stress-ng: CPU stress testing (Tools tab)
+	optdepends = s-tui: terminal stress/monitoring TUI (Tools tab)
+	optdepends = powertop: power consumption analysis and auto-tune (Tools tab)
+	optdepends = lm_sensors: hardware sensor readings (Sensors tab)
+	optdepends = upower: battery status, energy rate, cycle count
+	optdepends = acpi: battery detail output
+	source = power-control-center-1.0.0.py::https://raw.githubusercontent.com/mehmetbayoglu/power-control-center/v1.0.0/power-control-center.py
+	sha256sums = 30fe4ddf4d95403a2d044ece9b2fe75dcf1846d1f6d5e697bcd0f5d94fab59be
+
+pkgname = power-control-center
