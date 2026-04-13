@@ -66,6 +66,17 @@ EOF
     install -Dm644 "$srcdir/$pkgname.desktop" \
         "$pkgdir/usr/share/applications/$pkgname.desktop"
 
+    # Polkit rule — allows wheel group to launch via pkexec without a password
+    install -Dm644 /dev/stdin \
+        "$pkgdir/usr/share/polkit-1/rules.d/49-$pkgname.rules" <<'EOF'
+polkit.addRule(function(action, subject) {
+    if (action.id == "org.freedesktop.policykit.exec" &&
+        subject.isInGroup("wheel")) {
+        return polkit.Result.YES;
+    }
+});
+EOF
+
     # License
     install -Dm644 /dev/stdin "$pkgdir/usr/share/licenses/$pkgname/LICENSE" <<'EOF'
 MIT License - Copyright (c) 2025 mehmetbayoglu
