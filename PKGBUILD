@@ -1,6 +1,6 @@
 # Maintainer: mehmetbayoglu <mehmetbayoglu@users.noreply.github.com>
 pkgname=power-control-center
-pkgver=1.1.3
+pkgver=1.2.0
 pkgrel=1
 pkgdesc="GUI power management for Linux laptops — CPU (Intel/AMD), GPU (NVIDIA/Arc/AMD), battery, TLP, daemons, sensors"
 arch=('any')
@@ -34,7 +34,7 @@ source=(
     "$pkgname.desktop"
 )
 sha256sums=(
-    '0cce0680381f7af0742a23683e89832f8ba6dff277321b9aa954be08d5871e54'
+    '5024800bbf19793718bc9dbb69b4642478f5545d3fedddca900a338a9df4b2aa'
     '085eea02ff51ff70b93e1842349be02f081a44e2104c26176c6a9d9f42b52cca'
 )
 
